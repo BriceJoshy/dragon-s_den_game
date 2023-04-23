@@ -88,6 +88,22 @@ const locations = [
     "button functions": [fightSlime, fightBeast, goTown],
     text: "You've entered the cave. You see some monsters",
   },
+  {
+    name: "fight",
+    "button text": ["Attack", "Dodge", "Run"],
+    "button functions": [attack, dodge, run],
+    text: "You've entered the cave. You see some monsters",
+  },
+  {
+    name: "Kill monster",
+    "button text": [
+      "Go to Town Square",
+      "Go to Town Square",
+      "Go to Town Square",
+    ],
+    "button functions": [goTown, goTown, goTown],
+    text: "The monster screams Arg! as it dies. you gain XP points and gold!!.",
+  },
 ];
 
 // initialize buttons
@@ -180,4 +196,52 @@ function fightDragon() {
   goFight();
 }
 
-function goFight() {}
+// go fight function
+function goFight() {
+  update(locations[3]);
+  monsterHealth = monsters[fighting].health;
+  // displaying the monster stats html element by updating the css display property = block
+  // updating the css text in javascript
+  monsterStats.style.display = "block";
+  // setting the inner text of the monster name and monster health
+  monsterNameText.innerText = monsters[fighting].name;
+  monsterHealthText.innerText = monsterHealth;
+}
+
+// attack function
+function attack() {
+  text.innerText = "The " + monsters[fighting].name + " attacks!.";
+  text.innerText =
+    "You attack it with your " + weapons[currentWeapon].name + ".";
+  // you get damage
+  health - +monsters[fighting].level;
+  // monster gets the damage
+  // math.random is going to generate a random number btw 0 and 1
+  // multiply by the xp and floor functions till for a whole number +1
+  monsterHealth -=
+    weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
+  healthText.innerText = health;
+  monsterHealthText.innerText = monsterHealth;
+  if (health <= 0) {
+    lose();
+  } else if (monsterHealth <= 0) {
+    defeatMonster();
+  }
+}
+
+// dodge function
+function dodge() {
+  text.innerText =
+    "You dodge the attack from the " + monsters[fighting].name + ".";
+}
+function run() {}
+function lose() {}
+function defeatMonster() {
+  // setting the gold to monsters level + 6.7 round to whole
+  gold += Math.floor(monsters[fighting].level * 6.7);
+  // xp is monsters level added to it
+  xp += monsters[fighting].level;
+  goldText.innerText = gold;
+  xpText.innerText = xp;
+  update(locations[4]);
+}
