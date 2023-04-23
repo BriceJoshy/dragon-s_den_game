@@ -106,9 +106,15 @@ const locations = [
   },
   {
     name: "lose",
-    "button text": ["REPLAY", "REPLAY", "REPLAY"],
+    "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
     "button functions": [restart, restart, restart],
     text: "You have died ☠️",
+  },
+  {
+    name: "win",
+    "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
+    "button functions": [restart, restart, restart],
+    text: "You've defeated the dragon, you win the game 🎉 !!!!!",
   },
 ];
 
@@ -221,7 +227,7 @@ function attack() {
   text.innerText =
     "You attack it with your " + weapons[currentWeapon].name + ".";
   // you get damage
-  health - +monsters[fighting].level;
+  health -= +monsters[fighting].level;
   // monster gets the damage
   // math.random is going to generate a random number btw 0 and 1
   // multiply by the xp and floor functions till for a whole number +1
@@ -232,7 +238,10 @@ function attack() {
   if (health <= 0) {
     lose();
   } else if (monsterHealth <= 0) {
-    defeatMonster();
+    // "=" is assignment operator , "==" compares after all the type conversions
+    // "===" compares directly without any type conversions , compares if they aare identical
+    // instead we use the ternary operator
+    fighting === 2 ? winGame() : defeatMonster();
   }
 }
 
@@ -255,6 +264,9 @@ function defeatMonster() {
 
 function lose() {
   update(locations[5]);
+}
+function winGame() {
+  update(locations[6]);
 }
 
 function restart() {
