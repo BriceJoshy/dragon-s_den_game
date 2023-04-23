@@ -26,13 +26,50 @@ const monsterStats = document.querySelector("#monsterStats");
 const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
 
+const weapons = [
+  {
+    name: "stick",
+    power: 5,
+  },
+  {
+    name: "dagger",
+    power: 30,
+  },
+  {
+    name: "claw hammer",
+    power: 50,
+  },
+  {
+    name: "sword",
+    power: 100,
+  },
+];
+
 // accessing the data index by the properties
 // using {} "empty objects"
 // objects contain key values
-const location = [
+const locations = [
   {
     name: "town square",
     "button text": ["Go to Store", "Go to Cave", "Fight Dragon"],
+    "button functions": [goStore, goCave, fightDragon],
+    text: 'You\'re in the  Town Square!. You see a sign that says "store".',
+  },
+  {
+    name: "store",
+    "button text": [
+      "Buy 10 health(10 gold)",
+      "Buy Weapon(30 gold)",
+      "Go to Town Square",
+    ],
+    "button functions": [buyHealth, buyWeapon, goTown],
+    text: "You've entered the store'",
+  },
+  {
+    name: "cave",
+    "button text": ["Fight Slime", "Fight Fanged Beast", "Go to town square"],
+    "button functions": [fightSlime, fightBeast, goTown],
+    text: "You've entered the cave. You see some monsters",
   },
 ];
 
@@ -43,37 +80,57 @@ button2.onclick = goCave;
 button3.onclick = fightDragon;
 
 // creating reusable functions
-function update(location) {}
-
-// functions
-function goStore() {
-  // updates the text
-  button1.innerText = "Buy 10 health(10 gold)";
-  button2.innerText = "Buy Weapon(30 gold)";
-  button3.innerText = "Go to Town Square";
-  button1.onclick = buyHealth;
-  button2.onclick = buyWeapon;
-  button3.onclick = goTown;
-  text.innerText = "You've entered the store!";
+function update(locations) {
+  button1.innerText = locations["button text"][0];
+  button2.innerText = locations["button text"][1];
+  button3.innerText = locations["button text"][2];
+  button1.onclick = locations["button functions"][0];
+  button2.onclick = locations["button functions"][1];
+  button3.onclick = locations["button functions"][2];
+  text.innerText = locations.text;
 }
 
-function goCave() {}
+// functions
+function goTown() {
+  update(locations[0]);
+}
+function goStore() {
+  update(locations[1]);
+}
+
+function goCave() {
+  update(locations[2]);
+}
 
 function fightDragon() {
   console.log("go to fighting dragon");
 }
 
 // for store stuff
-function buyHealth() {}
-function buyWeapon() {}
-function goTown() {
-  // updates the text
-  button1.innerText = "Go to Store";
-  button2.innerText = "Go to Cave";
-  button3.innerText = "Fight Dragon";
-  button1.onclick = goStore;
-  button2.onclick = goCave;
-  button3.onclick = fightDragon;
-  text.innerText =
-    'You\'re in the  Town Square!. You see a sign that says "store".';
+function buyHealth() {
+  if (gold >= 10 && health < 100) {
+    gold -= 10;
+    health += 10;
+    goldText.innerText = gold;
+    healthText.innerText = health;
+  } else if (gold < 10) {
+    text.innerText = "Not enough gold";
+  } else if (health == 100) {
+    text.innerText = "Health is full";
+  }
 }
+function buyWeapon() {
+  if (gold >= 30) {
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You know have a new " + newWeapon + "!!.\n";
+    inventory.push(newWeapon);
+    text.innerText += "In your inventory you have: " + inventory;
+  } else {
+    text.innerText = "Not enough gold";
+  }
+}
+function fightSlime() {}
+function fightBeast() {}
