@@ -14,4 +14,20 @@ let monsterHealth;
 // let inventory = ["stick","dagger","sword"];
 let inventory = ["stick"];
 
+// refrencing the html stuff
+const button1 = document.querySelector("#button1");
+const button2 = document.querySelector("#button1");
+const button3 = document.querySelector("#button1");
+const text = document.querySelector("#button1");
+const xpText = document.querySelector("#button1");
+const healthText = document.querySelector("#button1");
+const goldText = document.querySelector("#button1");
+const monsterStats = document.querySelector("#button1");
+const monsterNameText = document.querySelector("#button1");
+const monsterHealthText = document.querySelector("#button1");
 
+// initialize buttons
+
+button1.onclick = goStore;
+button2.onclick = goCave;
+button3.onclick = fightDragon;
