@@ -123,3 +123,34 @@ body {
   margin: 0 auto;
   display: none;
 }
+#winImage {
+  min-width: 1200px;
+  min-height: 570px;
+  max-width: 1200px;
+  max-height: 570px;
+  background-color: lightgray;
+  color: black;
+  margin: 0 auto;
+  display: none;
+}
+#loseImage {
+  min-width: 1200px;
+  min-height: 570px;
+  max-width: 1200px;
+  max-height: 570px;
+  background-color: lightgray;
+  color: black;
+  margin: 0 auto;
+  display: none;
+}
+
+#fightDragonImage {
+  min-width: 1200px;
+  min-height: 570px;
+  max-width: 1200px;
+  max-height: 570px;
+  background-color: lightgray;
+  color: black;
+  margin: 0 auto;
+  display: none;
+}

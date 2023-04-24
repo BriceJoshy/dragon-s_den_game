@@ -32,6 +32,9 @@ const buyHealthImage = document.querySelector("#buyHealthImage");
 const buyDaggerImage = document.querySelector("#buyDaggerImage");
 const buyClawHammerImage = document.querySelector("#buyClawHammerImage");
 const buySwordImage = document.querySelector("#buySwordImage");
+const winImage = document.querySelector("#winImage");
+const loseImage = document.querySelector("#loseImage");
+const fightDragonImage = document.querySelector("#fightDragonImage");
 
 const buy = [buyDaggerImage, buyClawHammerImage, buySwordImage];
 
@@ -156,12 +159,13 @@ function goTown() {
   townSquareImage.style.display = "block";
   storeImage.style.display = "none";
   caveInsideImage.style.display = "none";
-  storeImage.style.display = "none";
-  caveInsideImage.style.display = "none";
   buy[0].style.display = "none";
   buy[1].style.display = "none";
   buy[2].style.display = "none";
   buyHealthImage.style.display = "none";
+  winImage.style.display = "none";
+  loseImage.style.display = "none";
+  fightDragonImage.style.display = "none";
   update(locations[0]);
 }
 function goStore() {
@@ -179,6 +183,10 @@ function goCave() {
   caveInsideImage.style.display = "block";
   townSquareImage.style.display = "none";
   storeImage.style.display = "none";
+  buy[0].style.display = "none";
+  buy[1].style.display = "none";
+  buy[2].style.display = "none";
+  buyHealthImage.style.display = "none";
 
   update(locations[2]);
 }
@@ -257,6 +265,15 @@ function fightBeast() {
 }
 
 function fightDragon() {
+  fightDragonImage.style.display = "block";
+  loseImage.style.display = "none";
+  townSquareImage.style.display = "none";
+  storeImage.style.display = "none";
+  caveInsideImage.style.display = "none";
+  buy[0].style.display = "none";
+  buy[1].style.display = "none";
+  buy[2].style.display = "none";
+  buyHealthImage.style.display = "none";
   fighting = 2;
   goFight();
 }
@@ -324,7 +341,9 @@ function dodge() {
   text.innerText =
     "You dodge the attack from the " + monsters[fighting].name + ".";
 }
-function run() {}
+function run() {
+  goTown();
+}
 
 function defeatMonster() {
   // setting the gold to monsters level + 6.7 round to whole
@@ -337,9 +356,25 @@ function defeatMonster() {
 }
 
 function lose() {
+  loseImage.style.display = "block";
+  townSquareImage.style.display = "none";
+  storeImage.style.display = "none";
+  caveInsideImage.style.display = "none";
+  buy[0].style.display = "none";
+  buy[1].style.display = "none";
+  buy[2].style.display = "none";
+  buyHealthImage.style.display = "none";
   update(locations[5]);
 }
 function winGame() {
+  winImage.style.display = "block";
+  townSquareImage.style.display = "none";
+  storeImage.style.display = "none";
+  caveInsideImage.style.display = "none";
+  buy[0].style.display = "none";
+  buy[1].style.display = "none";
+  buy[2].style.display = "none";
+  buyHealthImage.style.display = "none";
   update(locations[6]);
 }
 
