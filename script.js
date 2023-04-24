@@ -25,6 +25,10 @@ const goldText = document.querySelector("#goldText");
 const monsterStats = document.querySelector("#monsterStats");
 const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
+const townSquareImage = document.querySelector("#townSquareImage");
+const storeImage = document.querySelector("#storeImage");
+const caveEntranceImage = document.querySelector("#caveEntranceImage");
+const caveInsideImage = document.querySelector("#caveInsideImage");
 
 const weapons = [
   {
@@ -138,13 +142,23 @@ function update(locations) {
 
 // functions
 function goTown() {
+  townSquareImage.style.display = "block";
+  storeImage.style.display = "none";
+  caveInsideImage.style.display = "none";
   update(locations[0]);
 }
 function goStore() {
+  storeImage.style.display = "block";
+  townSquareImage.style.display = "none";
+  caveInsideImage.style.display = "none";
   update(locations[1]);
 }
 
 function goCave() {
+  caveInsideImage.style.display = "block";
+  townSquareImage.style.display = "none";
+  storeImage.style.display = "none";
+
   update(locations[2]);
 }
 

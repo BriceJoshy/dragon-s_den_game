@@ -39,3 +39,58 @@ body {
 .stat {
   padding-right: 10px;
 }
+
+#townSquare {
+  min-width: 1200px;
+  min-height: 570px;
+  max-width: 1200px;
+  max-height: 720px;
+  background-color: black;
+  color: black;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+#townSquareImage {
+  min-width: 1200px;
+  min-height: 570px;
+  max-width: 1200px;
+  max-height: 570px;
+  background-color: lightgray;
+  color: black;
+  margin: 0 auto;
+  display: block;
+}
+
+#storeImage {
+  min-width: 1200px;
+  min-height: 570px;
+  max-width: 1200px;
+  max-height: 570px;
+  background-color: lightgray;
+  color: black;
+  margin: 0 auto;
+  display: none;
+}
+
+#caveEntranceImage {
+  min-width: 1200px;
+  min-height: 570px;
+  max-width: 1200px;
+  max-height: 570px;
+  background-color: lightgray;
+  color: black;
+  margin: 0 auto;
+  display: none;
+}
+
+#caveInsideImage {
+  min-width: 1200px;
+  min-height: 570px;
+  max-width: 1200px;
+  max-height: 570px;
+  background-color: lightgray;
+  color: black;
+  margin: 0 auto;
+  display: none;
+}
