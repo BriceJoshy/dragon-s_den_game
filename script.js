@@ -314,7 +314,7 @@ function attack() {
   healthText.innerText = health;
   monsterHealthText.innerText = monsterHealth;
   if (health <= 0) {
-    lose();
+    lose_dead();
   } else if (monsterHealth <= 0) {
     // "=" is assignment operator , "==" compares after all the type conversions
     // "===" compares directly without any type conversions , compares if they aare identical
@@ -355,7 +355,7 @@ function defeatMonster() {
   update(locations[4]);
 }
 
-function lose() {
+function lose_dead() {
   loseImage.style.display = "block";
   townSquareImage.style.display = "none";
   storeImage.style.display = "none";
@@ -364,8 +364,24 @@ function lose() {
   buy[1].style.display = "none";
   buy[2].style.display = "none";
   buyHealthImage.style.display = "none";
+  fightDragonImage.style.display = "none";
   update(locations[5]);
 }
+
+function lose() {
+    loseImage.style.display = "block";
+    townSquareImage.style.display = "none";
+    storeImage.style.display = "none";
+    caveInsideImage.style.display = "none";
+    buy[0].style.display = "none";
+    buy[1].style.display = "none";
+    buy[2].style.display = "none";
+    buyHealthImage.style.display = "none";
+    fightDragonImage.style.display = "none";
+    update(locations[5]);
+  }
+
+
 function winGame() {
   winImage.style.display = "block";
   townSquareImage.style.display = "none";
