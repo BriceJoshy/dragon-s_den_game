@@ -35,6 +35,7 @@ const buySwordImage = document.querySelector("#buySwordImage");
 const winImage = document.querySelector("#winImage");
 const loseImage = document.querySelector("#loseImage");
 const fightDragonImage = document.querySelector("#fightDragonImage");
+const deadImage = document.querySelector("#deadImage");
 
 const buy = [buyDaggerImage, buyClawHammerImage, buySwordImage];
 
@@ -166,6 +167,7 @@ function goTown() {
   winImage.style.display = "none";
   loseImage.style.display = "none";
   fightDragonImage.style.display = "none";
+  deadImage.style.display = "none";
   update(locations[0]);
 }
 function goStore() {
@@ -356,7 +358,7 @@ function defeatMonster() {
 }
 
 function lose_dead() {
-  loseImage.style.display = "block";
+  deadImage.style.display = "block";
   townSquareImage.style.display = "none";
   storeImage.style.display = "none";
   caveInsideImage.style.display = "none";
@@ -378,6 +380,7 @@ function lose() {
     buy[2].style.display = "none";
     buyHealthImage.style.display = "none";
     fightDragonImage.style.display = "none";
+    deadImage.style.display = "none";
     update(locations[5]);
   }
 
@@ -391,6 +394,7 @@ function winGame() {
   buy[1].style.display = "none";
   buy[2].style.display = "none";
   buyHealthImage.style.display = "none";
+  deadImage.style.display = "none";
   update(locations[6]);
 }
 
