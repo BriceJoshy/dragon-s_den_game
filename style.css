@@ -73,7 +73,7 @@ body {
   display: none;
 }
 
-#caveEntranceImage {
+#caveInsideImage {
   min-width: 1200px;
   min-height: 570px;
   max-width: 1200px;
@@ -83,8 +83,37 @@ body {
   margin: 0 auto;
   display: none;
 }
-
-#caveInsideImage {
+#buyHealthImage {
+  min-width: 1200px;
+  min-height: 570px;
+  max-width: 1200px;
+  max-height: 570px;
+  background-color: lightgray;
+  color: black;
+  margin: 0 auto;
+  display: none;
+}
+#buyDaggerImage {
+  min-width: 1200px;
+  min-height: 570px;
+  max-width: 1200px;
+  max-height: 570px;
+  background-color: lightgray;
+  color: black;
+  margin: 0 auto;
+  display: none;
+}
+#buyClawHammerImage {
+  min-width: 1200px;
+  min-height: 570px;
+  max-width: 1200px;
+  max-height: 570px;
+  background-color: lightgray;
+  color: black;
+  margin: 0 auto;
+  display: none;
+}
+#buySwordImage {
   min-width: 1200px;
   min-height: 570px;
   max-width: 1200px;

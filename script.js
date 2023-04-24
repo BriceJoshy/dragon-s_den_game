@@ -27,8 +27,13 @@ const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
 const townSquareImage = document.querySelector("#townSquareImage");
 const storeImage = document.querySelector("#storeImage");
-const caveEntranceImage = document.querySelector("#caveEntranceImage");
 const caveInsideImage = document.querySelector("#caveInsideImage");
+const buyHealthImage = document.querySelector("#buyHealthImage");
+const buyDaggerImage = document.querySelector("#buyDaggerImage");
+const buyClawHammerImage = document.querySelector("#buyClawHammerImage");
+const buySwordImage = document.querySelector("#buySwordImage");
+
+const buy = [buyDaggerImage, buyClawHammerImage, buySwordImage];
 
 const weapons = [
   {
@@ -105,7 +110,7 @@ const locations = [
       "Go to Town Square",
       "Go to Town Square",
     ],
-    "button functions": [goTown, goTown, goTown],
+    "button functions": [goTown, goTown, easterEgg],
     text: 'The monster screams "Arg!" as it dies. you gain XP points and gold!!.',
   },
   {
@@ -119,6 +124,12 @@ const locations = [
     "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
     "button functions": [restart, restart, restart],
     text: "You've defeated the dragon, you win the game 🎉 !!!!!",
+  },
+  {
+    name: "easter egg",
+    "button text": ["2", "8", "Go to Town Square!!"],
+    "button functions": [pickTwo, pickEight, goTown],
+    text: "You find a secret game. Pick a number above. Ten numbers will be randomly chosen beyween 0 and 10. If the number matches one of the random numbers, you win!!",
   },
 ];
 
@@ -145,12 +156,22 @@ function goTown() {
   townSquareImage.style.display = "block";
   storeImage.style.display = "none";
   caveInsideImage.style.display = "none";
+  storeImage.style.display = "none";
+  caveInsideImage.style.display = "none";
+  buy[0].style.display = "none";
+  buy[1].style.display = "none";
+  buy[2].style.display = "none";
+  buyHealthImage.style.display = "none";
   update(locations[0]);
 }
 function goStore() {
   storeImage.style.display = "block";
   townSquareImage.style.display = "none";
   caveInsideImage.style.display = "none";
+  buy[0].style.display = "none";
+  buy[1].style.display = "none";
+  buy[2].style.display = "none";
+  buyHealthImage.style.display = "none";
   update(locations[1]);
 }
 
@@ -169,6 +190,11 @@ function buyHealth() {
     health += 10;
     goldText.innerText = gold;
     healthText.innerText = health;
+    storeImage.style.display = "none";
+    buy[0].style.display = "none";
+    buy[1].style.display = "none";
+    buy[2].style.display = "none";
+    buyHealthImage.style.display = "block";
   } else if (gold < 10) {
     text.innerText = "Not enough gold";
   } else if (health == 100) {
@@ -185,6 +211,18 @@ function buyWeapon() {
       text.innerText = "You know have a new " + newWeapon + "!!.\n";
       inventory.push(newWeapon);
       text.innerText += "In your inventory you have: " + inventory;
+      storeImage.style.display = "none";
+      buyHealthImage.style.display = "none";
+      if (currentWeapon === 1) {
+        buy[0].style.display = "block";
+      } else if (currentWeapon === 2) {
+        buy[0].style.display = "none";
+        buy[1].style.display = "block";
+      } else if (currentWeapon === 3) {
+        buy[0].style.display = "none";
+        buy[1].style.display = "none";
+        buy[2].style.display = "block";
+      }
     } else {
       text.innerText = "Not enough gold";
     }
@@ -241,7 +279,16 @@ function attack() {
   text.innerText =
     "You attack it with your " + weapons[currentWeapon].name + ".";
   // you get damage
-  health -= +monsters[fighting].level;
+  if (isMonsterHit()) {
+    health -= getMonsterAttackValue(monsters[fighting].level);
+  } else {
+    text.innerText += "Attack Missed!!";
+  }
+  if (Math.random() <= 0.1 && inventory.length !== 1) {
+    // should not break the only weapon
+    text.innerText += "Your " + inventory.pop() + " breaks!!";
+    currentWeapon--;
+  }
   // monster gets the damage
   // math.random is going to generate a random number btw 0 and 1
   // multiply by the xp and floor functions till for a whole number +1
@@ -257,6 +304,19 @@ function attack() {
     // instead we use the ternary operator
     fighting === 2 ? winGame() : defeatMonster();
   }
+}
+
+function getMonsterAttackValue(level) {
+  let hit = level * 5 - Math.floor(Math.random() * xp);
+  console.log(hit);
+  // returning the value
+  return hit;
+}
+
+function isMonsterHit() {
+  // return 80% true i.e except 20%
+  // if the players health is <20 then its always a hit
+  return Math.random() > 0.2 || health < 20;
 }
 
 // dodge function
@@ -293,4 +353,42 @@ function restart() {
   healthText.innerText = health;
   xpText.innerText = xp;
   goTown();
+}
+
+function easterEgg() {
+  update(locations[7]);
+}
+
+function pickTwo() {
+  pick(2);
+}
+
+function pickEight() {
+  pick(8);
+}
+
+// while the numbers is less than 10 push a random number
+// if > 10 the condition becomes false
+function pick(guess) {
+  let numbers = [];
+  while (numbers.length < 10) {
+    numbers.push(Math.round(Math.random() * 11));
+  }
+  text.innerText =
+    "You've picked " + guess + ". Here are the random numbers:\n";
+  for (let i = 0; i < 10; i++) {
+    text.innerText += numbers[i] + "\n";
+  }
+  if (numbers.indexOf(guess) !== -1) {
+    text.innerText = "Right! You win 20 gold!!!!";
+    gold += 20;
+    goldText.innerText = gold;
+  } else {
+    text.innerText = "Wrong! You lose 10 health!!!";
+    health -= 10;
+    healthText.innerText = health;
+    if (health <= 0) {
+      lose();
+    }
+  }
 }
